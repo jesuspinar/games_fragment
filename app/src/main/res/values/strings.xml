@@ -3,4 +3,5 @@
     <string name="player_attempt">Attempt to go</string>
     <string name="picked_letters">Picked letters</string>
     <string name="random_word">wo_d</string>
+    <string name="start_message">New game</string>
 </resources>
