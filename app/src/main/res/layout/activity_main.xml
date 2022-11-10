@@ -10,7 +10,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.jesuspinar.gamesfragment.fragments.FragmentHangman"
+        android:name="com.jesuspinar.gamesfragment.fragments.Home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

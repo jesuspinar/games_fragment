@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.jesuspinar.gamesfragment.R;
 import com.jesuspinar.gamesfragment.controller.IOnClickListener;
-import com.jesuspinar.gamesfragment.fragments.FragmentTicktacktoe;
+import com.jesuspinar.gamesfragment.fragments.Ticktacktoe;
 
 public class MainActivity extends AppCompatActivity implements IOnClickListener {
 
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements IOnClickListener 
         manager.beginTransaction()
                 .setReorderingAllowed(true)
                 .addToBackStack(null)
-                .replace(R.id.fragmentContainerView, FragmentTicktacktoe.class, null)
+                .replace(R.id.fragmentContainerView, Ticktacktoe.class, null)
                 .commit();
     }
 

@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.jesuspinar.gamesfragment.R;
 
-public class FragmentTicktacktoe extends Fragment {
+public class Ticktacktoe extends Fragment {
     private static int GAME_INDEX = 1;
 
     private int pointP1;
@@ -31,7 +31,7 @@ public class FragmentTicktacktoe extends Fragment {
     private TextView tvPointP2;
     private ConstraintLayout clBoard;
 
-    public FragmentTicktacktoe() {
+    public Ticktacktoe() {
         super(R.layout.fragment_ticktacktoe);
 
     }
