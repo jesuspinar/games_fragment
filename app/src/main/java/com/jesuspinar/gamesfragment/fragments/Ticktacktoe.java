@@ -3,7 +3,7 @@ package com.jesuspinar.gamesfragment.fragments;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,19 +14,18 @@ import androidx.fragment.app.Fragment;
 import com.jesuspinar.gamesfragment.R;
 
 public class Ticktacktoe extends Fragment {
-    private static int GAME_INDEX = 1; // By default starts O
 
     private int pointP1;
     private int pointP2;
-    private ImageButton ibCol1Row1;
-    private ImageButton ibCol2Row1;
-    private ImageButton ibCol3Row1;
-    private ImageButton ibCol1Row2;
-    private ImageButton ibCol2Row2;
-    private ImageButton ibCol3Row2;
-    private ImageButton ibCol1Row3;
-    private ImageButton ibCol2Row3;
-    private ImageButton ibCol3Row3;
+    private ImageView ibCol1Row1;
+    private ImageView ibCol2Row1;
+    private ImageView ibCol3Row1;
+    private ImageView ibCol1Row2;
+    private ImageView ibCol2Row2;
+    private ImageView ibCol3Row2;
+    private ImageView ibCol1Row3;
+    private ImageView ibCol2Row3;
+    private ImageView ibCol3Row3;
     private TextView tvPointP1;
     private TextView tvPointP2;
     private ConstraintLayout clBoard;
@@ -53,8 +52,6 @@ public class Ticktacktoe extends Fragment {
         //Get textview to display result
         tvPointP1 = view.findViewById(R.id.tvScoreO);
         tvPointP2 = view.findViewById(R.id.tvScoreY);
-        //Get constrain layout board
-        clBoard = view.findViewById(R.id.clBoard);
         //Create event listeners
         ibCol1Row1.setOnClickListener(this::changeImg);
         ibCol2Row1.setOnClickListener(this::changeImg);
@@ -70,19 +67,11 @@ public class Ticktacktoe extends Fragment {
     }
 
     /**
-     * Implements a turn
-     * @return player movement
-     */
-    private int getLast() {
-        if(GAME_INDEX == 0) GAME_INDEX = 1;
-        else GAME_INDEX = 0;
-        return GAME_INDEX;
-    }
-    /**
      * Depending of the turn will add (X|O) img to the selected img button
      */
     private void changeImg(View v) {
-        int img = getLast();
+        //TODO: IMPLEMENT GAME LOGIC
+        int img = 0;
         //Alternates touch
         if (img == 0){
             img = R.drawable.ticktacktoeo;
