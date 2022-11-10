@@ -31,6 +31,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="64dp"
+        android:background="#575F65"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -39,6 +40,8 @@
             android:id="@+id/ibCol1Row1"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:backgroundTint="#F0F4C3"
+            android:scaleType="fitStart"
             app:layout_constraintBottom_toTopOf="@+id/ibCol1Row2"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ticktacktoe_void" />
@@ -47,6 +50,8 @@
             android:id="@+id/ibCol2Row1"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:backgroundTint="#F0F4C3"
+            android:scaleType="fitStart"
             app:layout_constraintBottom_toTopOf="@+id/ibCol2Row2"
             app:layout_constraintStart_toEndOf="@+id/ibCol1Row1"
             app:srcCompat="@drawable/ticktacktoe_void" />
@@ -55,6 +60,8 @@
             android:id="@+id/ibCol3Row1"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:backgroundTint="#F0F4C3"
+            android:scaleType="fitStart"
             app:layout_constraintBottom_toTopOf="@+id/ibCol3Row2"
             app:layout_constraintStart_toEndOf="@+id/ibCol2Row1"
             app:srcCompat="@drawable/ticktacktoe_void" />
@@ -63,6 +70,8 @@
             android:id="@+id/ibCol1Row2"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:backgroundTint="#F0F4C3"
+            android:scaleType="fitStart"
             app:layout_constraintBottom_toTopOf="@+id/ibCol1Row3"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ticktacktoe_void" />
@@ -71,6 +80,8 @@
             android:id="@+id/ibCol2Row2"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:backgroundTint="#F0F4C3"
+            android:scaleType="fitStart"
             app:layout_constraintBottom_toTopOf="@+id/ibCol2Row3"
             app:layout_constraintStart_toEndOf="@+id/ibCol1Row2"
             app:srcCompat="@drawable/ticktacktoe_void" />
@@ -79,6 +90,8 @@
             android:id="@+id/ibCol3Row2"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:backgroundTint="#F0F4C3"
+            android:scaleType="fitStart"
             app:layout_constraintBottom_toTopOf="@+id/ibCol3Row3"
             app:layout_constraintStart_toEndOf="@+id/ibCol2Row2"
             app:srcCompat="@drawable/ticktacktoe_void" />
@@ -87,6 +100,8 @@
             android:id="@+id/ibCol1Row3"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:backgroundTint="#F0F4C3"
+            android:scaleType="fitStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ticktacktoe_void" />
@@ -95,6 +110,8 @@
             android:id="@+id/ibCol2Row3"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:backgroundTint="#F0F4C3"
+            android:scaleType="fitStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ibCol1Row3"
             app:srcCompat="@drawable/ticktacktoe_void" />
@@ -103,6 +120,8 @@
             android:id="@+id/ibCol3Row3"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:backgroundTint="#F0F4C3"
+            android:scaleType="fitStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ibCol2Row3"
             app:srcCompat="@drawable/ticktacktoe_void" />
