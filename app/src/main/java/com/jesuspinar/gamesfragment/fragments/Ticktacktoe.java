@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.jesuspinar.gamesfragment.R;
 
 public class Ticktacktoe extends Fragment {
-    private static int GAME_INDEX = 1;
+    private static int GAME_INDEX = 1; // By default starts O
 
     private int pointP1;
     private int pointP2;
@@ -56,7 +56,17 @@ public class Ticktacktoe extends Fragment {
         //Get constrain layout board
         clBoard = view.findViewById(R.id.clBoard);
         //Create event listeners
-        clBoard.setOnClickListener(this::changeImg);
+        ibCol1Row1.setOnClickListener(this::changeImg);
+        ibCol2Row1.setOnClickListener(this::changeImg);
+        ibCol3Row1.setOnClickListener(this::changeImg);
+
+        ibCol1Row2.setOnClickListener(this::changeImg);
+        ibCol2Row2.setOnClickListener(this::changeImg);
+        ibCol3Row2.setOnClickListener(this::changeImg);
+
+        ibCol1Row3.setOnClickListener(this::changeImg);
+        ibCol2Row3.setOnClickListener(this::changeImg);
+        ibCol3Row3.setOnClickListener(this::changeImg);
     }
 
     /**
@@ -69,7 +79,7 @@ public class Ticktacktoe extends Fragment {
         return GAME_INDEX;
     }
     /**
-     * Depending of the turn will add a img to the selected img button
+     * Depending of the turn will add (X|O) img to the selected img button
      */
     private void changeImg(View v) {
         int img = getLast();
@@ -107,8 +117,8 @@ public class Ticktacktoe extends Fragment {
         else if(v.getId() == R.id.ibCol2Row3){
             ibCol2Row3.setImageResource(img);
         }
-        else if(v.getId() == R.id.ibCol2Row3){
-            ibCol2Row3.setImageResource(img);
+        else if(v.getId() == R.id.ibCol3Row3){
+            ibCol3Row3.setImageResource(img);
         }
     }
 

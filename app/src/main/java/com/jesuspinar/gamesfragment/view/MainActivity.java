@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.jesuspinar.gamesfragment.R;
 import com.jesuspinar.gamesfragment.controller.IOnClickListener;
+import com.jesuspinar.gamesfragment.fragments.Home;
 import com.jesuspinar.gamesfragment.fragments.Ticktacktoe;
 
 public class MainActivity extends AppCompatActivity implements IOnClickListener {
