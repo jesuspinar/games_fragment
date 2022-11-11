@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.jesuspinar.gamesfragment.R;
@@ -17,6 +16,8 @@ import com.jesuspinar.gamesfragment.controller.GameTickTackToe;
 public class Ticktacktoe extends Fragment {
 
     private final char PLAYER_COIN = 'o'; //development config
+    private final int playerImgCoin;
+    private final int cpuImgCoin;
     private GameTickTackToe game;
 
     private int pointP1;
@@ -35,12 +36,16 @@ public class Ticktacktoe extends Fragment {
     private TextView tvPointP1;
     private TextView tvPointP2;
 
-    private int playerImgCoin;
 
     public Ticktacktoe() {
         super(R.layout.fragment_ticktacktoe);
-        if (PLAYER_COIN == 'o') playerImgCoin = R.drawable.ticktacktoeo;
-        else playerImgCoin = R.drawable.ticktacktoex;
+        if (PLAYER_COIN == 'o') {
+            playerImgCoin = R.drawable.ticktacktoeo;
+            cpuImgCoin = R.drawable.ticktacktoex;
+        } else {
+            playerImgCoin = R.drawable.ticktacktoex;
+            cpuImgCoin = R.drawable.ticktacktoeo;
+        }
     }
 
     @Override
@@ -64,84 +69,57 @@ public class Ticktacktoe extends Fragment {
 
         //Create event listeners
         //ROW 1 ---------------------------
-        ibCol1Row1.setOnClickListener(v -> {
-            int id = v.getId();
-            changeImg(id, playerImgCoin);//for player
-            game.addMove(1, 1, PLAYER_COIN);
-
-        });
-        ibCol2Row1.setOnClickListener(v -> {
-            int id = v.getId();
-            changeImg(id, playerImgCoin);//for player
-            game.addMove(1, 2, PLAYER_COIN);
-
-        });
-        ibCol3Row1.setOnClickListener(v -> {
-            int id = v.getId();
-            changeImg(id, playerImgCoin);//for player
-            game.addMove(1, 3, PLAYER_COIN);
-
-        });
+        ibCol1Row1.setOnClickListener(manager(0));
+        ibCol2Row1.setOnClickListener(manager(1));
+        ibCol3Row1.setOnClickListener(manager(2));
         //ROW 2 ---------------------------
-        ibCol1Row2.setOnClickListener(v -> {
-            int id = v.getId();
-            changeImg(id, playerImgCoin);//for player
-            game.addMove(2, 1, PLAYER_COIN);
-
-        });
-        ibCol2Row2.setOnClickListener(v -> {
-            int id = v.getId();
-            changeImg(id, playerImgCoin);//for player
-            game.addMove(2, 2, PLAYER_COIN);
-
-        });
-        ibCol3Row2.setOnClickListener(v -> {
-            int id = v.getId();
-            changeImg(id, playerImgCoin);//for player
-            game.addMove(2, 3, PLAYER_COIN);
-
-        });
+        ibCol1Row2.setOnClickListener(manager(3));
+        ibCol2Row2.setOnClickListener(manager(4));
+        ibCol3Row2.setOnClickListener(manager(5));
         //ROW 3 ---------------------------
-        ibCol1Row3.setOnClickListener(v -> {
-            int id = v.getId();
-            changeImg(id, playerImgCoin);//for player
-            game.addMove(3, 1, PLAYER_COIN);
-
-        });
-        ibCol2Row3.setOnClickListener(v -> {
-            int id = v.getId();
-            changeImg(id, playerImgCoin);//for player
-            game.addMove(3, 2, PLAYER_COIN);
-
-        });
-        ibCol3Row3.setOnClickListener(v -> {
-            int id = v.getId();
-            changeImg(id, playerImgCoin);//for player
-           //TODO: int cpuMove = game.addMove(3, 3, PLAYER_COIN);
-
-        });
+        ibCol1Row3.setOnClickListener(manager(6));
+        ibCol2Row3.setOnClickListener(manager(7));
+        ibCol3Row3.setOnClickListener(manager(8));
 
     }
 
     /**
+     * This places an img and manage the game
+     *
+     * @param pos refers to the array position
+     * @return
+     */
+    public View.OnClickListener manager(int pos) {
+        return v -> {
+            changeImg(pos, playerImgCoin);
+            int posCpu = game.addMove(pos, PLAYER_COIN);
+            changeImg(posCpu, cpuImgCoin);
+
+            //TODO: check if isWin
+
+            //TODO: resets game
+        };
+    }
+
+    /**
      * Depending of the *PLAYER_COIN* will add (X|O) img to the selected img button
-     * @param id represents the id of the ImageView
+     *
+     * @param pos acts like static id for ImageView
      * @param coin represents player or cpu move
      */
-    private void changeImg(int id, int coin) {
-        Log.w("changeImg", "click passed");
-        //ROW 1 ---------------------------
-        if (id == R.id.ibCol1Row1)      ibCol1Row1.setImageResource(coin);
-        else if (id == R.id.ibCol2Row1) ibCol2Row1.setImageResource(coin);
-        else if (id == R.id.ibCol3Row1) ibCol3Row1.setImageResource(coin);
-        //ROW 2 ---------------------------
-        else if (id == R.id.ibCol1Row2) ibCol1Row2.setImageResource(coin);
-        else if (id == R.id.ibCol2Row2) ibCol2Row2.setImageResource(coin);
-        else if (id == R.id.ibCol3Row2) ibCol3Row2.setImageResource(coin);
-        //ROW 3 ---------------------------
-        else if (id == R.id.ibCol1Row3) ibCol1Row3.setImageResource(coin);
-        else if (id == R.id.ibCol2Row3) ibCol2Row3.setImageResource(coin);
-        else if (id == R.id.ibCol3Row3) ibCol3Row3.setImageResource(coin);
+    private void changeImg(int pos, int coin){
+        //TODO: solve double click bug
+        switch (pos){
+            case 0: ibCol1Row1.setImageResource(coin);break;
+            case 1: ibCol2Row1.setImageResource(coin);break;
+            case 2: ibCol3Row1.setImageResource(coin);break;
+            case 3: ibCol1Row2.setImageResource(coin);break;
+            case 4: ibCol2Row2.setImageResource(coin);break;
+            case 5: ibCol3Row2.setImageResource(coin);break;
+            case 6: ibCol1Row3.setImageResource(coin);break;
+            case 7: ibCol2Row3.setImageResource(coin);break;
+            case 8: ibCol3Row3.setImageResource(coin);break;
+        }
     }
 
 }

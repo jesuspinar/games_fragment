@@ -10,11 +10,8 @@ public class GameTickTackToe {
     public GameTickTackToe(char playerCoin) {
         board = new char[9];
         newGame();
-        if (playerCoin == 'o')
-            CPU_COIN = 'x';
-        else
-            CPU_COIN = 'o';
-
+        if (playerCoin == 'o') CPU_COIN = 'x';
+        else CPU_COIN = 'o';
     }
 
     public void newGame(){
@@ -23,47 +20,33 @@ public class GameTickTackToe {
 
     /**
      * Adds a movement to the board if empty position
-     * @param row
-     * @param col
+     * @param pos
      * @param xo
      * @return the next move of the CPU
      */
-    public int addMove(int row, int col, char xo){
+    public int addMove(int pos, char xo){
         char empty = ' ';
         //ROW 1 ---------------------------
-        if (empty == board[0] && row == 1 && col == 1){
-            board[0] = xo;
-        }
-        else if (empty == board[1] && row == 1 && col == 2){
-            board[1] = xo;
-        }
-        else if (empty == board[2] && row == 1 && col == 3){
-            board[2] = xo;
-        }
+        if (empty == board[0] && pos == 0) board[0] = xo;
+        else if (empty == board[1] && pos == 1) board[1] = xo;
+        else if (empty == board[2] && pos == 2) board[2] = xo;
         //ROW 2 ---------------------------
-        else if (empty == board[3] && row == 2 && col == 1){
-            board[3] = xo;
-        }
-        else if (empty == board[4] && row == 2 && col == 2){
-            board[4] = xo;
-        }
-        else if (empty == board[5] && row == 2 && col == 3){
-            board[5] = xo;
-        }
+        else if (empty == board[3] && pos == 3) board[3] = xo;
+        else if (empty == board[4] && pos == 4) board[4] = xo;
+        else if (empty == board[5] && pos == 5) board[5] = xo;
         //ROW 3 ---------------------------
-        else if (empty == board[6] && row == 3 && col == 1){
-            board[6] = xo;
-        }
-        else if (empty == board[7] && row == 3 && col == 2){
-            board[7] = xo;
-        }
-        else if (empty == board[8] && row == 3 && col == 3){
-            board[8] = xo;
-        }
+        else if (empty == board[6] && pos == 6) board[6] = xo;
+        else if (empty == board[7] && pos == 7) board[7] = xo;
+        else if (empty == board[8] && pos == 8) board[8] = xo;
 
-       return cpuAddMove();
+        //PLAYS THE CPU --------
+        return cpuAddMove();
     }
 
+    /**
+     * Cpu game logic
+     * @return the move has made
+     */
     private int cpuAddMove() {
         for (int i = 0; i < board.length; i++) {
             if (board[i] == ' '){
