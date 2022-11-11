@@ -22,9 +22,8 @@ public class GameTickTackToe {
      * Adds a movement to the board if empty position
      * @param pos
      * @param xo
-     * @return the next move of the CPU
      */
-    public int addMove(int pos, char xo){
+    public void addMove(int pos, char xo){
         char empty = ' ';
         //ROW 1 ---------------------------
         if (empty == board[0] && pos == 0) board[0] = xo;
@@ -38,16 +37,13 @@ public class GameTickTackToe {
         else if (empty == board[6] && pos == 6) board[6] = xo;
         else if (empty == board[7] && pos == 7) board[7] = xo;
         else if (empty == board[8] && pos == 8) board[8] = xo;
-
-        //PLAYS THE CPU --------
-        return cpuAddMove();
     }
 
     /**
      * Cpu game logic
      * @return the move has made
      */
-    private int cpuAddMove() {
+    public int addMoveCpu() {
         for (int i = 0; i < board.length; i++) {
             if (board[i] == ' '){
                 board[i] = CPU_COIN;

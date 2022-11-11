@@ -1,10 +1,11 @@
 package com.jesuspinar.gamesfragment.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,12 +17,15 @@ import com.jesuspinar.gamesfragment.controller.GameTickTackToe;
 public class Ticktacktoe extends Fragment {
 
     private final char PLAYER_COIN = 'o'; //development config
+    private final char CPU_COIN = 'x'; //development config
     private final int playerImgCoin;
     private final int cpuImgCoin;
     private GameTickTackToe game;
 
-    private int pointP1;
-    private int pointP2;
+    private int pointPlayer;
+    private int pointCpu;
+    private TextView tvPointPlayer;
+    private TextView tvPointCpu;
 
     private ImageView ibCol1Row1;
     private ImageView ibCol2Row1;
@@ -32,9 +36,6 @@ public class Ticktacktoe extends Fragment {
     private ImageView ibCol1Row3;
     private ImageView ibCol2Row3;
     private ImageView ibCol3Row3;
-
-    private TextView tvPointP1;
-    private TextView tvPointP2;
 
 
     public Ticktacktoe() {
@@ -52,9 +53,13 @@ public class Ticktacktoe extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         game = new GameTickTackToe(PLAYER_COIN);
+
+        //Init new game button
+        Button btnNewGame = view.findViewById(R.id.btnNewGame);
+
         //Get textview to display result
-        tvPointP1 = view.findViewById(R.id.tvScoreO);
-        tvPointP2 = view.findViewById(R.id.tvScoreY);
+        tvPointPlayer = view.findViewById(R.id.tvScoreO);
+        tvPointCpu = view.findViewById(R.id.tvScoreY);
 
         //Get buttons id
         ibCol1Row1 = view.findViewById(R.id.ibCol1Row1);
@@ -68,6 +73,7 @@ public class Ticktacktoe extends Fragment {
         ibCol3Row3 = view.findViewById(R.id.ibCol3Row3);
 
         //Create event listeners
+        btnNewGame.setOnClickListener(v -> gameReset());
         //ROW 1 ---------------------------
         ibCol1Row1.setOnClickListener(manager(0));
         ibCol2Row1.setOnClickListener(manager(1));
@@ -80,7 +86,6 @@ public class Ticktacktoe extends Fragment {
         ibCol1Row3.setOnClickListener(manager(6));
         ibCol2Row3.setOnClickListener(manager(7));
         ibCol3Row3.setOnClickListener(manager(8));
-
     }
 
     /**
@@ -92,13 +97,40 @@ public class Ticktacktoe extends Fragment {
     public View.OnClickListener manager(int pos) {
         return v -> {
             changeImg(pos, playerImgCoin);
-            int posCpu = game.addMove(pos, PLAYER_COIN);
-            changeImg(posCpu, cpuImgCoin);
+            game.addMove(pos, PLAYER_COIN);
 
-            //TODO: check if isWin
+            changeImg(game.addMoveCpu(), cpuImgCoin);
 
-            //TODO: resets game
+            boolean cpuWin = game.isWin(CPU_COIN);
+            boolean playerWin = game.isWin(PLAYER_COIN);
+
+            if (playerWin){
+                Toast.makeText(getContext(), "Player Wins!", Toast.LENGTH_SHORT).show();
+                gameReset();
+                pointPlayer++;
+                tvPointPlayer.setText(String.valueOf(pointPlayer));
+            }else if(cpuWin){
+                Toast.makeText(getContext(), "CPU Wins!", Toast.LENGTH_SHORT).show();
+                gameReset();
+                pointCpu++;
+                tvPointCpu.setText(String.valueOf(pointCpu));
+            }
         };
+    }
+
+    private void gameReset(){
+        int empty = R.drawable.ticktacktoe_void;
+        game.newGame();
+        ibCol1Row1.setImageResource(empty);
+        ibCol2Row1.setImageResource(empty);
+        ibCol3Row1.setImageResource(empty);
+        ibCol1Row2.setImageResource(empty);
+        ibCol2Row2.setImageResource(empty);
+        ibCol3Row2.setImageResource(empty);
+        ibCol1Row3.setImageResource(empty);
+        ibCol2Row3.setImageResource(empty);
+        ibCol3Row3.setImageResource(empty);
+
     }
 
     /**
