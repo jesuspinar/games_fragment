@@ -325,7 +325,7 @@
                 android:layout_margin="0dp"
                 android:backgroundTint="#FFFFFF"
                 android:padding="0dp"
-                android:text="W"
+                android:text="T"
                 android:textSize="12sp" />
 
             <Button
