@@ -4,14 +4,19 @@ import java.util.Arrays;
 
 public class GameTickTackToe {
 
+    private char CPU_COIN;
     private final char[] board;
 
-    public GameTickTackToe() {
-        board = new char[]{' ',' ',' ',
-                             ' ',' ',' ',
-                             ' ',' ',' '};
+    public GameTickTackToe(char playerCoin) {
+        board = new char[9];
+        newGame();
+        if (playerCoin == 'o')
+            CPU_COIN = 'x';
+        else
+            CPU_COIN = 'o';
+
     }
-    
+
     public void newGame(){
         Arrays.fill(board, ' ');
     }
@@ -21,8 +26,9 @@ public class GameTickTackToe {
      * @param row
      * @param col
      * @param xo
+     * @return the next move of the CPU
      */
-    public void addMove(int row, int col, char xo){
+    public int addMove(int row, int col, char xo){
         char empty = ' ';
         //ROW 1 ---------------------------
         if (empty == board[0] && row == 1 && col == 1){
@@ -54,46 +60,32 @@ public class GameTickTackToe {
         else if (empty == board[8] && row == 3 && col == 3){
             board[8] = xo;
         }
+
+       return cpuAddMove();
     }
 
-    public boolean isWin(){
-        //TODO: implement player won
-        char xo = 'o'; //player coin
+    private int cpuAddMove() {
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] == ' '){
+                board[i] = CPU_COIN;
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public boolean isWin(char xo){
         //Left-right check
-        if (board[0] == xo && board[1] == xo && board[2] == xo){
-            //player won
-            return true;
-        }
-        else if (board[3] == xo && board[4] == xo && board[5] == xo){
-            //player won
-            return true;
-        }
-        else if (board[6] == xo && board[7] == xo && board[8] == xo){
-            //player won
-            return true;
-        }
+        if (board[0] == xo && board[1] == xo && board[2] == xo) return true;
+        else if (board[3] == xo && board[4] == xo && board[5] == xo) return true;
+        else if (board[6] == xo && board[7] == xo && board[8] == xo) return true;
         //Top-bottom check
-        else if (board[0] == xo && board[3] == xo && board[6] == xo){
-            //player won
-            return true;
-        }
-        else if (board[1] == xo && board[4] == xo && board[7] == xo){
-            //player won
-            return true;
-        }
-        else if (board[2] == xo && board[5] == xo && board[8] == xo){
-            //player won
-            return true;
-        }
+        else if (board[0] == xo && board[3] == xo && board[6] == xo) return true;
+        else if (board[1] == xo && board[4] == xo && board[7] == xo) return true;
+        else if (board[2] == xo && board[5] == xo && board[8] == xo) return true;
         //Diagonal check
-        else if (board[0] == xo && board[4] == xo && board[8] == xo){
-            //player won
-            return true;
-        }
-        else if (board[2] == xo && board[4] == xo && board[6] == xo){
-            //player won
-            return true;
-        }
+        else if (board[0] == xo && board[4] == xo && board[8] == xo) return true;
+        else if (board[2] == xo && board[4] == xo && board[6] == xo) return true;
         return false;
     }
 }
