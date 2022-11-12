@@ -12,12 +12,18 @@ public class GameHangman {
     private final StringBuilder sbGuessedLetter;
     private String wordToGuess;
     private int attempts;
-    char[] lettersWord;
+    private char[] lettersWord;
 
     public GameHangman() {
-        attempts = ATTEMPT_CONF;
         sbFailedLetter = new StringBuilder();
         sbGuessedLetter = new StringBuilder();
+    }
+
+    public void newGame() {
+        attempts = ATTEMPT_CONF;
+        sbFailedLetter.setLength(0);
+        sbGuessedLetter.setLength(0);
+        getRandomWord();
     }
 
     /**
@@ -25,7 +31,7 @@ public class GameHangman {
      * and saves to String and a char array.
      * @return the new random word
      */
-    public String getRandomWord(){
+    private String getRandomWord(){
         Random r = new Random();
         int max = words.length;
         wordToGuess = words[r.nextInt(max)];
@@ -33,29 +39,54 @@ public class GameHangman {
         return wordToGuess;
     }
 
-    public void addFailedLetter(String letter){
-        sbFailedLetter.append(letter);
-    }
-
     public String getFailedLetter(){
         return sbFailedLetter.toString();
     }
 
     /**
-     * This method checks if the letter is word
-     * @param c represents de character
+     * Changes under score char with the correct letters
+     * @return the parsed string
+     */
+    public String getFilteredLetters(){
+
+        //TODO: check this logic
+        StringBuilder temp = new StringBuilder();
+        char[] tempWord = wordToGuess.toCharArray();
+
+        for (int i = 0; i < tempWord.length; i++) {
+            for (int j = 0; j < sbGuessedLetter.length(); j++) {
+                if (tempWord[i] == sbGuessedLetter.charAt(j)){
+                    temp.append(tempWord[i]);
+                };
+            }
+            temp.append("_");
+        }
+
+        return temp.toString();
+    }
+
+    /**
+     * This method checks if the letter is word and
+     * adds letter to failed or guessed string builder
+     * @param c represents the character
      * @return true if it's in the word
      */
     public boolean contains(char c){
+        //TODO: check this logic
+        boolean isIn = false;
         if (wordToGuess == null) return false;
         for (int i = 0; i < wordToGuess.length(); i++) {
             if(c == lettersWord[i]){
                 sbGuessedLetter.append(c);
-                return true;
+                isIn = true;
             }
         }
-        sbFailedLetter.append(c);
-        return false;
+        if (isIn) sbFailedLetter.append(c);
+        return isIn;
+    }
+
+    public int getWordLength(){
+        return lettersWord.length;
     }
 
     /**

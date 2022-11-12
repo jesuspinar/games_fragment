@@ -1,7 +1,5 @@
 package com.jesuspinar.gamesfragment.fragments;
 
-import android.annotation.SuppressLint;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +19,7 @@ public class Hangman extends Fragment {
     private String word;
     private String wordToGuess;
 
-    private TextView tvWord, tvAttempPlayer, tvPickedLetters;
+    private TextView tvWord, tvAttemptPlayer, tvPickedLetters;
     private Button btn_a, btn_b, btn_c, btn_d, btn_e, btn_f, btn_g, btn_h, btn_i, btn_j,
                    btn_k, btn_l, btn_m, btn_n, btn_ny, btn_o, btn_p, btn_q, btn_r,
                    btn_s, btn_t, btn_u, btn_v, btn_w, btn_x, btn_y, btn_z ;
@@ -33,9 +31,13 @@ public class Hangman extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        game = new GameHangman();
-        //get the word
-        wordToGuess = game.getRandomWord();
+        init();
+
+        tvWord = view.findViewById(R.id.tvWord);
+        tvAttemptPlayer = view.findViewById(R.id.tvAttempsPlayer);
+        tvPickedLetters = view.findViewById(R.id.tvPickedLetters);
+
+        wordFilter();
 
         btn_a = view.findViewById(R.id.btn_a);
         btn_b = view.findViewById(R.id.btn_b);
@@ -68,25 +70,47 @@ public class Hangman extends Fragment {
         setBtnListeners();
     }
 
+    private void init() {
+        game = new GameHangman();
+        game.newGame();
+    }
+
     private View.OnClickListener manager(char letter) {
         return v -> {
-            //get the word
-            //check if the letter is NOT in the word
             if (!game.contains(letter)){
-                //block btn change color bg
-                v.setEnabled(false);
-                v.setClickable(false);
+                game.subtractAttempt();
                 tvPickedLetters.setText(game.getFailedLetter());
-
+                disableBtn(v);
             }
             else{
-                //is in the word . action
-
+               tvWord.setText(game.getFilteredLetters());
             }
+            //(game.getAttempts() == 0){ //player lose
+            // }
+
             //game.isMatch()
         };
     }
 
+    /**
+     * Hides the word with under score char at start
+     */
+    private void wordFilter(){
+        StringBuilder filter = new StringBuilder();
+        for (int i = 0; i < game.getWordLength(); i++) {
+            filter.append('_');
+        }
+        tvWord.setText(filter.toString());
+    }
+
+    /**
+     * Properties that will affect to btn
+     * @param btn
+     */
+    private void disableBtn(View btn){
+        btn.setEnabled(false);
+        btn.setClickable(false);
+    }
 
     private void setBtnListeners() {
         btn_a.setOnClickListener(manager('a'));
