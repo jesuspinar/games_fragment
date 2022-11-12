@@ -14,56 +14,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/hangman_0" />
+        app:srcCompat="@drawable/hangman_6" />
 
     <TextView
-        android:id="@+id/tvLettersText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/picked_letters"
-        app:layout_constraintEnd_toStartOf="@+id/tvPickedLetters2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAttempsText" />
-
-    <TextView
-        android:id="@+id/tvAttempsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Attemps"
-        app:layout_constraintBottom_toTopOf="@+id/tvLettersText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/tvPickedLetters"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:letterSpacing="0.2"
-        android:text="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvAttempsText"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/tvPickedLetters2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        android:letterSpacing="0.2"
-        android:text="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvLettersText"
-        app:layout_constraintTop_toBottomOf="@+id/tvPickedLetters" />
-
-    <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -77,6 +31,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivHangman" />
+
+    <TextView
+        android:id="@+id/tvAttempsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Attemps"
+        app:layout_constraintBottom_toTopOf="@+id/tvLettersText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWord" />
+
+    <TextView
+        android:id="@+id/tvAttempsPlayer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvAttempsText"
+        app:layout_constraintTop_toBottomOf="@+id/tvWord" />
+
+    <TextView
+        android:id="@+id/tvLettersText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/picked_letters"
+        app:layout_constraintEnd_toStartOf="@+id/tvPickedLetters"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAttempsText" />
+
+    <TextView
+        android:id="@+id/tvPickedLetters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:letterSpacing="0.2"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvLettersText"
+        app:layout_constraintTop_toBottomOf="@+id/tvAttempsPlayer" />
 
     <TableLayout
         android:id="@+id/tableLayout"
