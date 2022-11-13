@@ -3,7 +3,9 @@ package com.jesuspinar.gamesfragment.fragments;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +21,7 @@ public class Hangman extends Fragment {
     private String word;
     private String wordToGuess;
 
+    private ImageView ivHangman;
     private TextView tvWord, tvAttemptPlayer, tvPickedLetters;
     private Button btn_a, btn_b, btn_c, btn_d, btn_e, btn_f, btn_g, btn_h, btn_i, btn_j,
                    btn_k, btn_l, btn_m, btn_n, btn_ny, btn_o, btn_p, btn_q, btn_r,
@@ -31,13 +34,10 @@ public class Hangman extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        init();
-
         tvWord = view.findViewById(R.id.tvWord);
         tvAttemptPlayer = view.findViewById(R.id.tvAttempsPlayer);
         tvPickedLetters = view.findViewById(R.id.tvPickedLetters);
-
-        wordFilter();
+        ivHangman = view.findViewById(R.id.ivHangman);
 
         btn_a = view.findViewById(R.id.btn_a);
         btn_b = view.findViewById(R.id.btn_b);
@@ -67,40 +67,65 @@ public class Hangman extends Fragment {
         btn_y = view.findViewById(R.id.btn_y);
         btn_z = view.findViewById(R.id.btn_z);
 
+
+        init();
         setBtnListeners();
     }
 
     private void init() {
         game = new GameHangman();
-        game.newGame();
+        newGame();
     }
 
     private View.OnClickListener manager(char letter) {
         return v -> {
+            disableBtn(v);
             if (!game.contains(letter)){
                 game.subtractAttempt();
-                tvPickedLetters.setText(game.getFailedLetter());
-                disableBtn(v);
-            }
-            else{
-               tvWord.setText(game.getFilteredLetters());
-            }
-            //(game.getAttempts() == 0){ //player lose
-            // }
+                int attempts = game.getAttempts();
+                tvAttemptPlayer.setText(String.valueOf(attempts));
 
-            //game.isMatch()
+                switch (attempts){
+                    case 6: ivHangman.setImageResource(R.drawable.hangman_6); break;
+                    case 5: ivHangman.setImageResource(R.drawable.hangman_5); break;
+                    case 4: ivHangman.setImageResource(R.drawable.hangman_4); break;
+                    case 3: ivHangman.setImageResource(R.drawable.hangman_3); break;
+                    case 2: ivHangman.setImageResource(R.drawable.hangman_2); break;
+                    case 1: ivHangman.setImageResource(R.drawable.hangman_1); break;
+                    case 0: ivHangman.setImageResource(R.drawable.hangman_0); break;
+                }
+            }
+            tvWord.setText(game.wordReveal(letter));
+            tvPickedLetters.setText(game.getLetters());
+
+            if(game.getAttempts() == 0){
+                displayDefeatMessage();
+                newGame();
+                resetButtonProperties();
+            }
+            if (game.isMatch(tvWord.getText().toString())){
+                displayWinMessage();
+                newGame();
+                resetButtonProperties();
+            }
         };
     }
 
-    /**
-     * Hides the word with under score char at start
-     */
-    private void wordFilter(){
-        StringBuilder filter = new StringBuilder();
-        for (int i = 0; i < game.getWordLength(); i++) {
-            filter.append('_');
-        }
-        tvWord.setText(filter.toString());
+    private void newGame() {
+        game.newGame();
+        ivHangman.setImageResource(R.drawable.hangman_6);
+        tvAttemptPlayer.setText(String.valueOf(game.getAttempts()));
+        tvPickedLetters.setText("");
+        tvWord.setText(game.wordFilter());
+    }
+
+
+    private void displayDefeatMessage() {
+        Toast.makeText(getContext(), R.string.defeat_message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void displayWinMessage() {
+        Toast.makeText(getContext(), R.string.win_message, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -112,6 +137,63 @@ public class Hangman extends Fragment {
         btn.setClickable(false);
     }
 
+    private void resetButtonProperties(){
+        btn_a.setEnabled(true);
+        btn_a.setClickable(true);
+        btn_b.setEnabled(true);
+        btn_b.setClickable(true);
+        btn_c.setEnabled(true);
+        btn_c.setClickable(true);
+        btn_d.setEnabled(true);
+        btn_d.setClickable(true);
+        btn_e.setEnabled(true);
+        btn_e.setClickable(true);
+        btn_f.setEnabled(true);
+        btn_f.setClickable(true);
+        btn_g.setEnabled(true);
+        btn_g.setClickable(true);
+        btn_h.setEnabled(true);
+        btn_h.setClickable(true);
+        btn_i.setEnabled(true);
+        btn_i.setClickable(true);
+        btn_j.setEnabled(true);
+        btn_j.setClickable(true);
+        btn_k.setEnabled(true);
+        btn_k.setClickable(true);
+        btn_l.setEnabled(true);
+        btn_l.setClickable(true);
+        btn_m.setEnabled(true);
+        btn_m.setClickable(true);
+        btn_n.setEnabled(true);
+        btn_n.setClickable(true);
+        btn_ny.setEnabled(true);
+        btn_ny.setClickable(true);
+        btn_o.setEnabled(true);
+        btn_o.setClickable(true);
+        btn_p.setEnabled(true);
+        btn_p.setClickable(true);
+        btn_q.setEnabled(true);
+        btn_q.setClickable(true);
+        btn_r.setEnabled(true);
+        btn_r.setClickable(true);
+        btn_s.setEnabled(true);
+        btn_s.setClickable(true);
+        btn_t.setEnabled(true);
+        btn_t.setClickable(true);
+        btn_u.setEnabled(true);
+        btn_u.setClickable(true);
+        btn_v.setEnabled(true);
+        btn_v.setClickable(true);
+        btn_w.setEnabled(true);
+        btn_w.setClickable(true);
+        btn_x.setEnabled(true);
+        btn_x.setClickable(true);
+        btn_y.setEnabled(true);
+        btn_y.setClickable(true);
+        btn_z.setEnabled(true);
+        btn_z.setClickable(true);
+    }
+
     private void setBtnListeners() {
         btn_a.setOnClickListener(manager('a'));
         btn_b.setOnClickListener(manager('b'));
@@ -121,7 +203,7 @@ public class Hangman extends Fragment {
         btn_f.setOnClickListener(manager('f'));
         btn_g.setOnClickListener(manager('g'));
         btn_h.setOnClickListener(manager('h'));
-        btn_i.setOnClickListener(manager('y'));
+        btn_i.setOnClickListener(manager('i'));
         btn_j.setOnClickListener(manager('f'));
         btn_k.setOnClickListener(manager('k'));
         btn_l.setOnClickListener(manager('l'));

@@ -101,6 +101,7 @@ public class Ticktacktoe extends Fragment {
 
             changeImg(game.addMoveCpu(), cpuImgCoin);
 
+            //TODO: separate win check
             boolean cpuWin = game.isWin(CPU_COIN);
             boolean playerWin = game.isWin(PLAYER_COIN);
 
@@ -140,7 +141,7 @@ public class Ticktacktoe extends Fragment {
      * @param coin represents player or cpu move
      */
     private void changeImg(int pos, int coin){
-        //TODO: solve double click bug
+        //TODO: avoid img position override
         switch (pos){
             case 0: ibCol1Row1.setImageResource(coin);break;
             case 1: ibCol2Row1.setImageResource(coin);break;

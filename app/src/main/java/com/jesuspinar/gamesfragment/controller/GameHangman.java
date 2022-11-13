@@ -5,25 +5,27 @@ import java.util.Random;
 public class GameHangman {
 
     //DEVELOPMENT VARS
-    private final int ATTEMPT_CONF = 5;
+    private final int ATTEMPT_CONF = 6;
+    private final String[] words = {"bocata","coche","humano","ironia","flor"};
+
     //GAME VARS
-    private final String[] words = {"bocata","coche","humano","ironia","zaragoza"};
-    private final StringBuilder sbFailedLetter;
-    private final StringBuilder sbGuessedLetter;
+    private final StringBuilder sbLetters;
+    private final StringBuilder body;
     private String wordToGuess;
-    private int attempts;
     private char[] lettersWord;
+    private int attempts;
 
     public GameHangman() {
-        sbFailedLetter = new StringBuilder();
-        sbGuessedLetter = new StringBuilder();
+        sbLetters = new StringBuilder();
+        body = new StringBuilder();
     }
 
     public void newGame() {
         attempts = ATTEMPT_CONF;
-        sbFailedLetter.setLength(0);
-        sbGuessedLetter.setLength(0);
-        getRandomWord();
+        sbLetters.setLength(0);
+        body.setLength(0);
+        setRandomWord();
+        setWordBody();
     }
 
     /**
@@ -31,62 +33,55 @@ public class GameHangman {
      * and saves to String and a char array.
      * @return the new random word
      */
-    private String getRandomWord(){
+    private void setRandomWord(){
         Random r = new Random();
         int max = words.length;
         wordToGuess = words[r.nextInt(max)];
         lettersWord = wordToGuess.toCharArray();
-        return wordToGuess;
     }
 
-    public String getFailedLetter(){
-        return sbFailedLetter.toString();
+    public String getLetters(){
+        return sbLetters.toString();
+    }
+
+    /**
+     * Create a body string builder
+     */
+    private void setWordBody() {
+        for (char c : lettersWord) {
+            body.append("_");
+        }
     }
 
     /**
      * Changes under score char with the correct letters
      * @return the parsed string
      */
-    public String getFilteredLetters(){
-
-        //TODO: check this logic
-        StringBuilder temp = new StringBuilder();
-        char[] tempWord = wordToGuess.toCharArray();
-
-        for (int i = 0; i < tempWord.length; i++) {
-            for (int j = 0; j < sbGuessedLetter.length(); j++) {
-                if (tempWord[i] == sbGuessedLetter.charAt(j)){
-                    temp.append(tempWord[i]);
-                };
+    public String wordReveal(char c){
+        for (int i = 0; i < lettersWord.length; i++) {
+            if (lettersWord[i] == c) {
+                body.setCharAt(i, c);
             }
-            temp.append("_");
         }
-
-        return temp.toString();
+        return body.toString();
     }
 
     /**
      * This method checks if the letter is word and
-     * adds letter to failed or guessed string builder
-     * @param c represents the character
+     * adds letter to string builder
+     * @param c represents the character or letter
      * @return true if it's in the word
      */
     public boolean contains(char c){
-        //TODO: check this logic
         boolean isIn = false;
-        if (wordToGuess == null) return false;
-        for (int i = 0; i < wordToGuess.length(); i++) {
-            if(c == lettersWord[i]){
-                sbGuessedLetter.append(c);
+        sbLetters.append(c);
+        for (char letter : lettersWord) {
+            if (c == letter) {
                 isIn = true;
+                break;
             }
         }
-        if (isIn) sbFailedLetter.append(c);
         return isIn;
-    }
-
-    public int getWordLength(){
-        return lettersWord.length;
     }
 
     /**
@@ -106,5 +101,15 @@ public class GameHangman {
         return attempts;
     }
 
-
+    /**
+     * Hides the word with under score char at start
+     * @return the word length
+     */
+    public String wordFilter(){
+        StringBuilder filter = new StringBuilder();
+        for (int i = 0; i < lettersWord.length; i++) {
+            filter.append('_');
+        }
+        return filter.toString();
+    }
 }

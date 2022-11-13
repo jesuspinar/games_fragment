@@ -4,4 +4,6 @@
     <string name="picked_letters">Picked letters</string>
     <string name="random_word">wo_d</string>
     <string name="start_message">New game</string>
+    <string name="win_message">Congratulations, You win !!</string>
+    <string name="defeat_message">So sorry, You lose :(</string>
 </resources>
